@@ -5,30 +5,34 @@ document.querySelector('.user-button').addEventListener('click', getUserDetails)
 
 function getUserDetails() {
 
+    var userDiv = document.getElementById("userInfo");
+    if (userDiv.style.display === "block") {
+        userDiv.style.display = "none";
+        return;
+    }
+
     var tokens = JSON.parse(localStorage.getItem("tokens"));
 
-    if (!tokens)
-        console.log("tokens este null");
-
-    fetch("https://api.spotify.com/v1/me" ,{
-        method : "GET",
+    fetch("https://api.spotify.com/v1/me", {
+        method: "GET",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + tokens.access_token
         }
     })
     .then(response => {
-        if(!response.ok){
+        if (!response.ok) {
             throw new Error('Failed to fetch the user profile details');
         }
         return response.json();
     })
-    .then( data  => {
-        if(data.error && data.error === 401){
+    .then(data => {
+        if (data.error && data.error === 401) {
             console.log("Token expired");
         } else {
             var user_details = data;
             localStorage.setItem("user", JSON.stringify(user_details));
+            manipulateUserData();
             console.log(user_details);
         }
     })
@@ -37,15 +41,42 @@ function getUserDetails() {
     });
 }
 
+function manipulateUserData() {
+    var user_details = JSON.parse(localStorage.getItem("user"));
+    var userDiv = document.getElementById("userInfo");
+    userDiv.className = "user-details";
+    userDiv.innerHTML = ""; // Clear previous content
+
+    var userHeader = document.createElement('h2');
+    userHeader.textContent = "User Details";
+    userDiv.appendChild(userHeader);
+
+    var userList = document.createElement('ul');
+
+    var listItem_country = document.createElement('li');
+    listItem_country.textContent = "Country: " + user_details.country;
+    var listItem_name = document.createElement('li');
+    listItem_name.textContent = "Name: " + user_details.display_name;
+    var listItem_email = document.createElement('li');
+    listItem_email.textContent = "Email: " + user_details.email;
+
+    userList.appendChild(listItem_country);
+    userList.appendChild(listItem_name);
+    userList.appendChild(listItem_email);
+
+    userDiv.appendChild(userList);
+    userDiv.style.display = "block"; // Show user details
+}
+
 document.querySelector('.artists-button').addEventListener('click', function() { 
     //getTop5("artists"); 
     localStorage.setItem("top5_button_was_pressed", "artists");
-    window.location.href = 'top5Artists.html';
+    window.location.href = 'top5.html';
 });
 document.querySelector('.tracks-button').addEventListener('click', function() { 
     // getTop5("tracks"); 
     localStorage.setItem("top5_button_was_pressed", "tracks");
-    window.location.href = 'top5Artists.html';
+    window.location.href = 'top5.html';
 });
 
 

@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+#output_top5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
