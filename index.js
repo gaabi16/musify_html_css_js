@@ -7,6 +7,9 @@ function getUserDetails() {
 
     var tokens = JSON.parse(localStorage.getItem("tokens"));
 
+    if (!tokens)
+        console.log("tokens este null");
+
     fetch("https://api.spotify.com/v1/me" ,{
         method : "GET",
         headers: {

@@ -5,7 +5,6 @@ window.addEventListener('load', function () {
     }
 });
 
-
 function searchItems(query, types = ['album', 'artist', 'track'], market = '', limit = 10, offset = 0) {
 
     var tokens = JSON.parse(localStorage.getItem("tokens"));
