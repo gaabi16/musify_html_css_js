@@ -11,7 +11,7 @@ function requestAuthorization() {
     var url = AUTHORIZE;
     url += "?client_id=" + client_id;
     url += "&response_type=code";
-    url += "&redirect_uri=" + encodeURI(redirect_uri);
+    url += "&redirect_uri=" + encodeURI(login_uri);
     url += "&show_dialog=true";
     url += "&scope=user-read-private user-read-email user-top-read";
 
@@ -25,7 +25,7 @@ document.querySelector('.login-button').addEventListener('click', function () {
 function fetchAccessToken(code) {
     var body = "grant_type=authorization_code";	
     body += "&code=" + code;
-    body += "&redirect_uri=" + encodeURI(redirect_uri);
+    body += "&redirect_uri=" + encodeURI(login_uri);
     body += "&client_id=" + client_id;
     body += "&client_secret=" + client_secret;
     callAuthorizationApi(body);
@@ -47,9 +47,11 @@ function callAuthorizationApi(body){
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        console.log("data is: ");
+        console.log(JSON.stringify(data));
+    
         localStorage.setItem("tokens", JSON.stringify(data));
-        window.location.ref = login_uri;
+        window.location.href = redirect_uri; 
     })
     .catch(error => {
         console.error('Error:', error);
@@ -69,7 +71,7 @@ function onPageLoad() {
 function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
-    window.history.pushState("", "", redirect_uri);
+    window.history.pushState("", "", login_uri);
 }
 
 function getCode() {

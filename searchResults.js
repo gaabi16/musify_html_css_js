@@ -75,9 +75,10 @@ function displayResults(searchResults) {
     const output = document.getElementById('output');
     output.innerHTML = '';
 
+    const albumsDiv = document.createElement('div');
     const albumsHeader = document.createElement('h2');
     albumsHeader.textContent = 'Albums';
-    output.appendChild(albumsHeader);
+    albumsDiv.appendChild(albumsHeader);
 
     const albumsList = document.createElement('ul');
     searchResults.albums.forEach(album => {
@@ -85,11 +86,13 @@ function displayResults(searchResults) {
         li.textContent = album;
         albumsList.appendChild(li);
     });
-    output.appendChild(albumsList);
+    albumsDiv.appendChild(albumsList);
+    output.appendChild(albumsDiv);
 
+    const artistsDiv = document.createElement('div');
     const artistsHeader = document.createElement('h2');
     artistsHeader.textContent = 'Artists';
-    output.appendChild(artistsHeader);
+    artistsDiv.appendChild(artistsHeader);
 
     const artistsList = document.createElement('ul');
     searchResults.artists.forEach(artist => {
@@ -97,11 +100,13 @@ function displayResults(searchResults) {
         li.textContent = artist;
         artistsList.appendChild(li);
     });
-    output.appendChild(artistsList);
+    artistsDiv.appendChild(artistsList);
+    output.appendChild(artistsDiv);
 
+    const tracksDiv = document.createElement('div');
     const tracksHeader = document.createElement('h2');
     tracksHeader.textContent = 'Tracks';
-    output.appendChild(tracksHeader);
+    tracksDiv.appendChild(tracksHeader);
 
     const tracksList = document.createElement('ul');
     searchResults.tracks.forEach(track => {
@@ -109,5 +114,6 @@ function displayResults(searchResults) {
         li.textContent = track;
         tracksList.appendChild(li);
     });
-    output.appendChild(tracksList);
+    tracksDiv.appendChild(tracksList);
+    output.appendChild(tracksDiv);
 }
