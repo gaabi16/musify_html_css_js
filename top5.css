@@ -1,12 +1,24 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f9f9f9;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
 h1 {
     text-align: center;
-    color: #333;
+    margin-bottom: 50px !important;
+    margin-top: 50px !important;
+    font-size: 40px !important;
+    letter-spacing: 0.3 em !important;
 }
+
 #output_top5 {
     display: flex;
     flex-wrap: wrap;
@@ -22,4 +34,9 @@ h1 {
 .btn-custom-green:hover {
     background-color: #218838 !important; 
     border-color: #1e7e34 !important;
+}
+
+.cardo-regular {
+    font-family: "Cardo", serif;
+    font-weight: 400;
 }

@@ -49,12 +49,19 @@ function manipulateUserData() {
     userDiv.classList.add("user-details");
 
     var userHeader = document.createElement('h2');
-    userHeader.textContent = "User Details";
+    userHeader.textContent = "USER DETAILS";
     userHeader.style.textAlign = "center";
-    userHeader.style.fontSize = "3em"; 
+    userHeader.style.fontSize = "2em";
+    userHeader.style.fontFamily = "Cardo, serif";
+    userHeader.style.letterSpacing = "0.1em";
     userDiv.appendChild(userHeader);
 
     var userList = document.createElement('ul');
+    userList.style.listStyleType = "none";
+    userList.style.fontStyle = "italic";
+    userList.style.fontSize = "1em";
+    userList.style.fontFamily = "Cardo, serif";
+    userList.style.marginTop = "10px";
 
     var listItem_country = document.createElement('li');
     listItem_country.textContent = "Country: " + user_details.country;
