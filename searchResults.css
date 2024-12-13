@@ -44,3 +44,14 @@ h1{
 #output div li {
     list-style-type: none;
 }
+
+.btn-custom-green {
+    background-color: #28a745 !important; 
+    border-color: #28a745 !important;
+    color: white !important; 
+}
+
+.btn-custom-green:hover {
+    background-color: #218838 !important; 
+    border-color: #1e7e34 !important;
+}

@@ -54,6 +54,7 @@ function getTop5(type) {
 
 function manipulateTracks() {
     document.querySelector("h1").textContent = "Top 5 Tracks";
+    document.querySelector("h1").style.marginTop = "2rem";
 
     var tracks = JSON.parse(localStorage.getItem("tracks"));
     var trackContainer = document.getElementById('output_top5');
@@ -96,6 +97,7 @@ function manipulateTracks() {
 
 function manipulateArtists() {
     document.querySelector("h1").textContent = "Top 5 Artists";
+    document.querySelector("h1").style.marginTop = "2rem";
 
     var artists = JSON.parse(localStorage.getItem("artists"));
     var artistContainer = document.getElementById('output_top5');
