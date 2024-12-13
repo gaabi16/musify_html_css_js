@@ -4,51 +4,54 @@ var login_uri = 'http://127.0.0.1:3000/login.html';
 document.querySelector('.user-button').addEventListener('click', getUserDetails);
 
 function getUserDetails() {
-
     var userDiv = document.getElementById("userInfo");
-    if (userDiv.style.display === "block") {
-        userDiv.style.display = "none";
-        return;
+
+    if (userDiv.classList.contains('user-details')) {
+        userDiv.classList.remove('user-details');
+        userDiv.innerHTML = "This is Musify!";
+    } else {
+        var tokens = JSON.parse(localStorage.getItem("tokens"));
+
+        fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokens.access_token
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch the user profile details');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error && data.error === 401) {
+                console.log("Token expired");
+            } else {
+                var user_details = data;
+                localStorage.setItem("user", JSON.stringify(user_details));
+                manipulateUserData();
+                console.log(user_details);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
-
-    var tokens = JSON.parse(localStorage.getItem("tokens"));
-
-    fetch("https://api.spotify.com/v1/me", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + tokens.access_token
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch the user profile details');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error && data.error === 401) {
-            console.log("Token expired");
-        } else {
-            var user_details = data;
-            localStorage.setItem("user", JSON.stringify(user_details));
-            manipulateUserData();
-            console.log(user_details);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 }
 
 function manipulateUserData() {
     var user_details = JSON.parse(localStorage.getItem("user"));
     var userDiv = document.getElementById("userInfo");
-    userDiv.className = "user-details";
-    userDiv.innerHTML = ""; // Clear previous content
+
+    userDiv.innerHTML = "";
+    userDiv.classList.add("user-details");
 
     var userHeader = document.createElement('h2');
     userHeader.textContent = "User Details";
+    userHeader.style.textAlign = "center";
+    userHeader.style.fontSize = "3em"; 
     userDiv.appendChild(userHeader);
 
     var userList = document.createElement('ul');
@@ -65,22 +68,16 @@ function manipulateUserData() {
     userList.appendChild(listItem_email);
 
     userDiv.appendChild(userList);
-    userDiv.style.display = "block"; // Show user details
 }
 
 document.querySelector('.artists-button').addEventListener('click', function() { 
-    //getTop5("artists"); 
     localStorage.setItem("top5_button_was_pressed", "artists");
     window.location.href = 'top5.html';
 });
 document.querySelector('.tracks-button').addEventListener('click', function() { 
-    // getTop5("tracks"); 
     localStorage.setItem("top5_button_was_pressed", "tracks");
     window.location.href = 'top5.html';
 });
-
-
-
 
 // document.getElementById('searchInput').addEventListener('input', function (event) {
 //     const query = event.target.value.trim(); 

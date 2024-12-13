@@ -1,10 +1,12 @@
 body {
     display: flex;
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    position: relative; 
 }
 
 .login-button {
@@ -25,4 +27,72 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute;
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
 }
+
+.user-info-toggle {
+    font-size: 10rem;  
+    text-align: center; 
+    transition: font-size 0.5s ease-in; 
+}
+
+.user-details {
+    font-size: 2rem; 
+    text-align: left; 
+}
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+    font-size: 1.2rem; 
+    min-height: 80px;
+    background-color:#cdffdc;
+}
+
+.nav-item button {
+    border: 2px solid #0a5b25; 
+    background-color: #b5f2d1; 
+    font-weight: bold; 
+    padding: 8px 16px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-item button:hover {
+    background-color: #3cb74e; 
+    border: 2px solid #0e441c; 
+    transform: scale(1.05); 
+}
+
+.nav-item {
+    margin-right: 5px;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
+}
+
+.navbar-brand {
+    font-size: 4rem; 
+    font-weight: bold; 
+    padding: 8px 16px; 
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
+    background-color: #7cf5b0; 
+    border-color: #0b1e16;
+    line-height: 2;
+}
+
+.navbar-brand:hover {
+    color: #ffffff; 
+    background-color: #32f791; 
+    border: 2px solid transparent; 
+    border-color: #0e1d0f; 
+    transform: scale(1.1); 
+    text-decoration: none;
+}
+
