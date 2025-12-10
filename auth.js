@@ -4,8 +4,8 @@ const TOKEN = "https://accounts.spotify.com/api/token";
 var redirect_uri = 'http://127.0.0.1:3000/index.html';
 var login_uri = 'http://127.0.0.1:3000/login.html';
 
-var client_id = "7aec7613dd6840dab4de83e43e5665e6";
-var client_secret = "cd861cec74034e89a9b271b0079cad69";
+var client_id = "8b10ce8f154e4cc193ffd851b48ccaf7";
+var client_secret = "cb179d13c7004ce585e1eee123399dde";
 
 function requestAuthorization() {
     var url = AUTHORIZE;
